@@ -1,6 +1,5 @@
 -#  This file is app/views/movies/index.html.haml
-%h2 All Movies
-
+%h2 All Movies  
 = form_tag movies_path, :method => :get, :id => 'ratings_form' do
   = hidden_field_tag "title_sort", true if @title_header
   = hidden_field_tag ":release_date_sort", true if @date_header
@@ -24,5 +23,12 @@
         %td= movie.rating
         %td= movie.release_date
         %td= link_to "More about #{movie.title}", movie_path(movie)
-
+        
 = link_to 'Add new movie', new_movie_path
+
+%h3 Search TMDb for a movie
+= form_tag search_tmdb_path, :method => :post do
+  = label_tag :search_terms, "Search Terms:"
+  = text_field_tag :search_terms, params[:search_terms]
+  = submit_tag "Search TMDb", :name => nil
+
